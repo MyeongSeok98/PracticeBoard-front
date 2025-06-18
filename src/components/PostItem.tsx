@@ -1,6 +1,6 @@
 // src/components/PostItem.tsx
 
-"use client"
+"use client";
 
 import Link from "next/link";
 import { Post } from "@/types";
@@ -24,27 +24,34 @@ export function PostItem({ post }: { post: Post }) {
     // 중요: 이 버튼을 클릭했을 때 부모인 Link의 페이지 이동이 실행되지 않도록 막습니다.
     e.preventDefault();
     e.stopPropagation();
-    
-    toggleLike(post.id);
+
+    toggleLike(post.post_id);
   };
 
   return (
-    <Link href={`/posts/${post.id}`}>
+    <Link href={`/posts/${post.post_id}`}>
       <Card className="hover:border-primary transition-all mb-5">
         <CardHeader>
-          <CardTitle>{post.title}</CardTitle>
+          <CardTitle>{post.postName}</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="line-clamp-2 text-muted-foreground">{post.content}</p>
+          <p className="line-clamp-2 text-muted-foreground">
+            {post.postContent}
+          </p>
         </CardContent>
         <CardFooter className="flex justify-between text-sm text-muted-foreground">
           <div>
-            <span>작성자: {post.author}</span>
+            <span>작성자: {post.postWriter}</span>
           </div>
-          
+
           <div className="flex items-center gap-4">
             {/* 좋아요 버튼 */}
-            <Button variant="ghost" size="sm" className="flex items-center gap-1" onClick={handleLikeClick}>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="flex items-center gap-1"
+              onClick={handleLikeClick}
+            >
               <Heart className="size-4" />
               <span>{post.likes}</span>
             </Button>

@@ -8,7 +8,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 
 export default function EditPostPage() {
   const { posts, editPost } = usePosts();
@@ -21,10 +27,10 @@ export default function EditPostPage() {
 
   // 페이지가 처음 로드될 때, 수정할 게시물의 데이터를 찾아서 state에 설정
   useEffect(() => {
-    const postToEdit = posts.find((p) => p.id === id);
+    const postToEdit = posts.find((p) => p.post_id === id);
     if (postToEdit) {
-      setTitle(postToEdit.title);
-      setContent(postToEdit.content);
+      setTitle(postToEdit.postName);
+      setContent(postToEdit.postContent);
     }
   }, [id, posts]);
 
@@ -41,20 +47,35 @@ export default function EditPostPage() {
     <main className="container mx-auto max-w-4xl p-4 md:p-8">
       <Card>
         <CardHeader>
-        <CardTitle className="text-2xl">글 수정하기</CardTitle>
+          <CardTitle className="text-2xl">글 수정하기</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="title">제목</Label>
-              <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+              <Input
+                id="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="content">내용</Label>
-              <Textarea id="content" value={content} onChange={(e) => setContent(e.target.value)} className="min-h-[300px]" />
+              <Textarea
+                id="content"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                className="min-h-[300px]"
+              />
             </div>
             <div className="flex justify-end gap-2">
-              <Button variant="outline" type="button" onClick={() => router.back()}>취소</Button>
+              <Button
+                variant="outline"
+                type="button"
+                onClick={() => router.back()}
+              >
+                취소
+              </Button>
               <Button type="submit">수정 완료</Button>
             </div>
           </form>

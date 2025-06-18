@@ -5,11 +5,10 @@ export interface Comment {
 }
 
 export interface Post {
-  id: number;
-  title: string;
-  content: string;
-  author: string;
-  createdAt: string;
+  post_id: number;
+  postName: string;
+  postContent: string;
+  postWriter: string;
   likes: number;
   comments: Comment[];
 }
